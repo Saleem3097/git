@@ -9,6 +9,7 @@ public class App
 {
     public static void main( String[] args )
     {
+		System.out.println("hey i did some updates")
         System.out.println( "please enter the number 1" );
         Scanner sc = new Scanner(System.in);
         int num1 = sc.nextInt();
