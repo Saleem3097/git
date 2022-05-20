@@ -9,7 +9,7 @@ public class App
 {
     public static void main( String[] args )
     {
-		System.out.println("hey i did some updates now again doing so");
+		System.out.println("hey i did some updates now again doing so 123456789");
         System.out.println( "please enter the number 1" );
         Scanner sc = new Scanner(System.in);
         int num1 = sc.nextInt();
