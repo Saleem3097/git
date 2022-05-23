@@ -4,7 +4,8 @@ pipeline {
     tools {
         maven 'maven'
     }
- 
+    environment {
+        PATH = 'C:\WINDOWS\System32'
     stages {
         stage('build') {
             steps {
