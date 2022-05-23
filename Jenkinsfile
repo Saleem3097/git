@@ -5,17 +5,17 @@ pipeline {
     stages {
         stage('compile') {
             steps {
-                bat 'mvn compile'
+                echo "hello"
             }
         }
         stage('testing') {
             steps {
-                bat 'mvn test'
+                echo "hi"
             }
         }
         stage('build') {
             steps {
-                bat 'mvn package'
+                echo "bye"
             }
         }
        
