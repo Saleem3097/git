@@ -1,63 +1,23 @@
-
 pipeline {
     agent any
-    environment{
-        MY_FILE = fileExists 'git'
-        EMAIL_TO = 'md.saleem3097@gmail.com'
-    }
-    post {
-        success {
-            emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
-                    to: "${EMAIL_TO}",
-                    subject: 'Build succeeded in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
-        }
-        failure {
-            emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
-                    to: "${EMAIL_TO}",
-                    subject: 'Build failed in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
-        }
-        unstable {
-            emailext body: 'Check console output at $BUILD_URL to view the results. \n\n ${CHANGES} \n\n -------------------------------------------------- \n${BUILD_LOG, maxLines=100, escapeHtml=false}',
-                    to: "${EMAIL_TO}",
-                    subject: 'Unstable build in Jenkins: $PROJECT_NAME - #$BUILD_NUMBER'
-        }
-        changed {
-            emailext body: 'Check console output at $BUILD_URL to view the results.',
-                    to: "${EMAIL_TO}",
-                    subject: 'Jenkins build is back to normal: $PROJECT_NAME - #$BUILD_NUMBER'
-        }
-    }
+      tools {
+          maven 'maven'
+          jdk 'java'
+      }
+      environment {
+          PATH = 'C://WINDOWS/System32'
+      }
     stages {
-        stage('clone repo') {
-            when { expression { MY_FILE == 'false' } }
+        stage('git') {
             steps {
-             bat "git clone https://github.com/Saleem3097/git.git"
-             print "pulled the code"
+            git 'https://github.com/Saleem3097/git.git'
             }
         }
-        stage('Compile') {
+        stage ('build') {
             steps {
-                bat """
-                cd git
-                mvn compile
-                """
-            }
-        }
-        stage('Test') {
-            steps {
-               bat"""
-               cd git
-               mvn test
-               """
-            }
-        }
-        stage('Package') {
-            steps {
-               bat"""
-               cd git
-               mvn package
-               """
+                bat 'mvn clean package'
             }
         }
     }
+    
 }
