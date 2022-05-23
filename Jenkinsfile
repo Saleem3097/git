@@ -37,10 +37,7 @@ pipeline {
         stage('clone repo') {
             when { expression { MY_FILE == 'false' } }
             steps {
-             bat"""
-             git clone https://github.com/Saleem3097/git.git"
-             print "pulled the code"
-             """
+             git 'https://github.com/Saleem3097/git.git'
             }
         }
         stage('Compile') {
