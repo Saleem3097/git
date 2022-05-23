@@ -3,6 +3,7 @@ pipeline {
       tools {
           maven 'maven'
           jdk 'java'
+          git 'git'
       }
       environment {
           PATH = 'C://WINDOWS/System32'
