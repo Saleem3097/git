@@ -2,9 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('compile') {
             steps {
-                echo 'Hello World'
+                bat 'mvn compile'
             }
         }
         stage('test') {
