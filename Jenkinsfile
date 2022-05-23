@@ -6,21 +6,11 @@ pipeline {
     }
  
     stages {
-        stage('compile') {
+        stage('build') {
             steps {
                 bat "mvn clean package"
             }
         }
-        stage('testing') {
-            steps {
-                echo "hi"
-            }
-        }
-        stage('build') {
-            steps {
-                echo "bye"
-            }
-        }
-       
-    }
+        
+       }
 }
