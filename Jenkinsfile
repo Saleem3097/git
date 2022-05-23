@@ -7,6 +7,7 @@ pipeline {
       environment {
           PATH = 'C://WINDOWS/System32'
           EMAIL_TO = 'md.saleem3097@gmail.com'
+          MY_FILE = fileexists 'git'
       }
       post {
         success {
@@ -34,8 +35,10 @@ pipeline {
         stage('clone repo') {
             when { expression { MY_FILE == 'false' } }
             steps {
-             bat "https://github.com/Saleem3097/git.git"
+             bat"""
+             git clone https://github.com/Saleem3097/git.git"
              print "pulled the code"
+             """
             }
         }
         stage('Compile') {
@@ -61,6 +64,6 @@ pipeline {
                mvn package
                """
             }
-
-    
+          }
+  }
 }
